@@ -12,6 +12,8 @@ import {
 const Home = () => {
   const router = useRouter();
 
+  const [searchTerm, setSearchTerm] = useState('');
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen
@@ -26,7 +28,7 @@ const Home = () => {
           ),
           headerRight: () => (
             <ScreenHeaderBtn
-              iconUrl={images.profile}
+              iconUrl={{ uri: 'https://picsum.photos/200' }}
               dimension='100%'
             />
           ),
@@ -35,7 +37,15 @@ const Home = () => {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
-          <Welcome />
+          <Welcome
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleClick={() => {
+              if (searchTerm) {
+                router.push(`/search/${searchTerm}`);
+              }
+            }}
+          />
           <Popularjobs />
           <Nearbyjobs />
         </View>
