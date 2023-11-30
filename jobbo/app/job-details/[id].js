@@ -19,7 +19,7 @@ import {
 import { COLORS, icons, SIZES } from '../../constants';
 import useFetch from '../../hook/useFetch';
 
-const tabs = ['About', 'Qualifications', 'Responsibilities'];
+const tabs = ['About', 'Qualifications', 'Responsibilities '];
 
 const JobDetails = () => {
   const params = useGlobalSearchParams();
@@ -37,16 +37,26 @@ const JobDetails = () => {
   const displayTabContent = () => {
     switch (activeTab) {
       case 'About':
-        return <JobAbout title="About" points={data[0].job_description} />;
+        return (
+          <JobAbout
+            title='About'
+            info={data[0].job_description ?? ['N/A']}
+          />
+        );
       case 'Qualifications':
         return (
           <Specifics
             title='Qualifications'
-            points={data[0].job_highlights?.qualifications ?? ['N/A']}
+            points={data[0].job_highlights?.Qualifications ?? ['N/A']}
           />
         );
       case 'Responsibilities':
-        return <Specifics points={data[0].job_responsibilities} />;
+        return (
+          <Specifics
+            title='Responsibilities'
+            points={data[0].job_highlights?.Responsibilities ?? ['N/A']}
+          />
+        );
       default:
         break;
     }
